@@ -3,6 +3,7 @@ This is a simple library for image segmentation written in Golang.
 I need it for my CG essay, but hope it'll be usefull for You too :)
 
 Structure:
+
 0) Loading and Saving Images.
 
 1) Grayscale algorithms:
