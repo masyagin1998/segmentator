@@ -39,4 +39,4 @@ Structure:
 # important notes
 
 1) Disputes on which coordinate system to use when processing images continues to the day. I prefer Gonsales-Woods varinant:
-![coordinate system](info/Coordinates.png)
+![Coordinate System](info/cs.png)
