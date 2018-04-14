@@ -119,12 +119,12 @@ func FGEDCustomOperators(img Image, GxOp, GyOp [][]int, do int) (err error) {
 		for y := 0; y < img.Width; y++ {
 			Gx := 0
 			Gy := 0
-			for i := -l / 2; i < l/2; i++ {
+			for i := -l / 2; i < (l+1)/2; i++ {
 				if (len(GxOp) != len(GxOp[i+l/2])) || (len(GxOp) != len(GyOp[i+l/2])) {
 					err = errors.New("Wrong matricies")
 					return
 				}
-				for j := -l / 2; j < l/2; j++ {
+				for j := -l / 2; j < (l+1)/2; j++ {
 					if (x+i < 0) || (x+i >= img.Height) || (y+j < 0) || (y+j >= img.Width) {
 						continue
 					}
@@ -144,6 +144,9 @@ func FGEDCustomOperators(img Image, GxOp, GyOp [][]int, do int) (err error) {
 		for x := 0; x < img.Height; x++ {
 			for y := 0; y < img.Width; y++ {
 				color := abs(GxMat[x][y])
+				if color > 255 {
+					color = 255
+				}
 				img.Pixels[x][y] = Pixel{color, color, color, img.Pixels[x][y].A}
 			}
 		}
@@ -151,6 +154,9 @@ func FGEDCustomOperators(img Image, GxOp, GyOp [][]int, do int) (err error) {
 		for x := 0; x < img.Height; x++ {
 			for y := 0; y < img.Width; y++ {
 				color := abs(GyMat[x][y])
+				if color > 255 {
+					color = 255
+				}
 				img.Pixels[x][y] = Pixel{color, color, color, img.Pixels[x][y].A}
 			}
 		}
@@ -158,6 +164,9 @@ func FGEDCustomOperators(img Image, GxOp, GyOp [][]int, do int) (err error) {
 		for x := 0; x < img.Height; x++ {
 			for y := 0; y < img.Width; y++ {
 				color := abs(GxMat[x][y]) + abs(GyMat[x][y])
+				if color > 255 {
+					color = 255
+				}
 				img.Pixels[x][y] = Pixel{color, color, color, img.Pixels[x][y].A}
 			}
 		}
@@ -165,6 +174,9 @@ func FGEDCustomOperators(img Image, GxOp, GyOp [][]int, do int) (err error) {
 		for x := 0; x < img.Height; x++ {
 			for y := 0; y < img.Width; y++ {
 				color := int(math.Sqrt(float64(GxMat[x][y]*GxMat[x][y] + GyMat[x][y]*GyMat[x][y])))
+				if color > 255 {
+					color = 255
+				}
 				img.Pixels[x][y] = Pixel{color, color, color, img.Pixels[x][y].A}
 			}
 		}
@@ -172,6 +184,7 @@ func FGEDCustomOperators(img Image, GxOp, GyOp [][]int, do int) (err error) {
 	return
 }
 
+// FGEDMarrHildreth uses Marr-Hildreth algorithm for finding Gx and Gy.
 func FGEDMarrHildreth(img Image) {
 
 }

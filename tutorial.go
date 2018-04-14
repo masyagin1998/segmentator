@@ -14,8 +14,8 @@ func main() {
 	fmt.Println()
 
 	// Loading image.
-	name := ""
 	path := ""
+	name := ""
 	fmt.Println("Choose path and name to load image:")
 	fmt.Printf("1) ")
 	fmt.Scanf("%s\n", &path)
@@ -25,12 +25,6 @@ func main() {
 	img, err := segmentator.LoadImage(path, name)
 	if err != nil {
 		log.Fatalf("Error occured, while loading image: %s", err)
-	}
-
-	segmentator.GSLuma(img)
-	err = segmentator.FGEDScharr(img, segmentator.SQRTGXGY)
-	if err != nil {
-		log.Fatalf("Error occured, while running Sobel algorithm: %s", err)
 	}
 
 	// Saving Image.
