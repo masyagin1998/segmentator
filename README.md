@@ -15,6 +15,12 @@ Structure:
 
 2) First generation algorithms:
    - Based on Edge-Detection:
+      - Roberts operator: func FGEDRoberts(img Image, do int) (err error)
+      - Previtt operator: func FGEDPrevitt(img Image, do int) (err error)
+      - Sobel operator:   func FGEDSobel(img Image, do int) (err error)
+      - Scharr operator:  func FGEDScharr(img Image, do int) (err error)
+      - Custom operator:  func FGEDCustomOperators(img Image, GxOp, GyOp [][]int, do int) (err error)
+      - Marr-Hildreth:
    - Based on Pixel Classification:
    - Based on Regions:
   
@@ -27,3 +33,10 @@ Structure:
    - Based on Edge-Detection:
    - Based on Pixel Classification:
    - Based on Regions:
+
+# structure of the library
+
+# important notes
+
+1) Disputes on which coordinate system to use when processing images continues to the day. I prefer Gonsales-Woods varinant:
+![alt text](info/01 - Coordinates.png)
