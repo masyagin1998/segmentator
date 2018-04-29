@@ -109,7 +109,7 @@ func FGEDCustomOperators(img Image, GxOp, GyOp [][]int, do int) (err error) {
 	var GxMat [][]int
 	var GyMat [][]int
 
-	// length of matrix
+	// Length of matrix.
 	l := len(GxOp)
 
 	// Cycles.
@@ -184,7 +184,70 @@ func FGEDCustomOperators(img Image, GxOp, GyOp [][]int, do int) (err error) {
 	return
 }
 
-// FGEDMarrHildreth uses Marr-Hildreth algorithm for finding Gx and Gy.
-func FGEDMarrHildreth(img Image) {
+// FGEDLaplacian4 uses 4-connected Laplacian for finding edges.
+func FGEDLaplacian4(img Image) (err error) {
+	// 4-connected Laplacian.
+	laplacian4 := [][]int{
+		{0, 1, 0},
+		{1, -4, 1},
+		{0, 1, 0},
+	}
 
+	return FGEDCustomOperator(img, laplacian4)
+}
+
+// FGEDLaplacian8 uses 8-connected Laplacian for finding edges.
+func FGEDLaplacian8(img Image) (err error) {
+	// 8-connected Laplacian.
+	laplacian8 := [][]int{
+		{1, 1, 1},
+		{1, -8, 1},
+		{1, 1, 1},
+	}
+
+	return FGEDCustomOperator(img, laplacian8)
+}
+
+// FGEDCustomOperator uses programmers operator for finding edges.
+func FGEDCustomOperator(img Image, operator [][]int) (err error) {
+	// Matrix after operator.
+	var opMat [][]int
+
+	// Length of matrix.
+	l := len(operator)
+
+	// Cycles.
+	for x := 0; x < img.Height; x++ {
+		var opRow []int
+		for y := 0; y < img.Width; y++ {
+			op := 0
+			for i := -l / 2; i < (l+1)/2; i++ {
+				if len(operator) != len(operator[i+l/2]) {
+					err = errors.New("Wrong matrix")
+					return
+				}
+				for j := -l / 2; j < (l+1)/2; j++ {
+					if (x+i < 0) || (x+i >= img.Height) || (y+j < 0) || (y+j >= img.Width) {
+						continue
+					}
+					op += operator[i+l/2][j+l/2] * img.Pixels[x+i][y+j].R
+				}
+			}
+			opRow = append(opRow, op)
+		}
+		opMat = append(opMat, opRow)
+	}
+	for x := 0; x < img.Height; x++ {
+		for y := 0; y < img.Width; y++ {
+			color := abs(opMat[x][y])
+			if color > 255 {
+				color = 255
+			}
+			if color < 0 {
+				color = 0
+			}
+			img.Pixels[x][y] = Pixel{color, color, color, img.Pixels[x][y].A}
+		}
+	}
+	return
 }
