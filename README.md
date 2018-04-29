@@ -22,21 +22,12 @@ I need it for my CG essay, but hope it'll be usefull for You too :)
       - Sobel operator:   func FGEDSobel(img Image, do int) (err error)
       - Scharr operator:  func FGEDScharr(img Image, do int) (err error)
       - Custom operator:  func FGEDCustomOperators(img Image, GxOp, GyOp [][]int, do int) (err error)
-      - Marr-Hildreth:
    - Based on Pixel Classification:
-   - Based on Regions:
-  
-3) Second generation algorithms:
-   - Based on Edge-Detection:
-   - Based on Pixel Classification:
-   - Based on Regions:
+      - Simple Iterative: func FGPCIterative(img Image) (threshold int)
+      - Otsu: func FGPCOtsuThresholding2(img Image) (threshold int)
+      - Custom: FGPCThreshold(img Image, thresholds []int, colors []Pixel) (err error)
    
-4) Third generation algorithms:
-   - Based on Edge-Detection:
-   - Based on Pixel Classification:
-   - Based on Regions:
-   
-5) Helpers:
+3) Helpers:
    - abs: func abs(value int) int
    - min: func min(values ...int) int
    - max: func max(values ...int) int
