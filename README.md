@@ -37,9 +37,3 @@ I need it for my CG synopsis (it is in synopsis folder), but hope it'll be usefu
 1) Disputes on which coordinate system to use when processing images continues to the day. I prefer Gonsales-Woods varinant:
 
 ![Coordinate System](info/cs.png)
-
-# examples
-
-![Original](examples/simple_operators/00 - original.jpg)
-![Roberts](examples/simple_operators/01 - roberts.jpg)
-![Sobel](examples/simple_operators/03 - sobel.jpg)
