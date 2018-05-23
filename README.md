@@ -1,6 +1,6 @@
 # segmentator
 This is a simple library for image segmentation written in Golang.
-I need it for my CG essay, but hope it'll be usefull for You too :)
+I need it for my CG synopsis (it is in synopsis folder), but hope it'll be usefull for You too :)
 
 # structure of the library
 
