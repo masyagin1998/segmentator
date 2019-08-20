@@ -81,7 +81,7 @@ func LoadImage(path, name string) (img Image, err error) {
 	for x := 0; x < img.Height; x++ {
 		var row []Pixel
 		for y := 0; y < img.Width; y++ {
-			r, g, b, a := decodedFile.At(y, x).RGBA()
+			r, g, b, a := decodedFile.At(x, y).RGBA()
 			row = append(row, Pixel{int(r / 257), int(g / 257), int(b / 257), int(a / 257)})
 		}
 		img.Pixels = append(img.Pixels, row)
